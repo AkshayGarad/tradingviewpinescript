@@ -1,0 +1,17 @@
+// This code will plot a rectangle on the chart to represent a supply zone
+plot(showSupplyZone ? high : na, title="Supply Zone", style=rectangle, color=red, linewidth=4)
+
+// This code will plot a rectangle on the chart to represent a demand zone
+plot(showDemandZone ? low : na, title="Demand Zone", style=rectangle, color=green, linewidth=4)
+
+// This code will determine if a supply zone should be shown
+if close > high[1]
+  showSupplyZone := close < open
+else
+  showSupplyZone := close > open
+
+// This code will determine if a demand zone should be shown
+if close < low[1]
+  showDemandZone := close > open
+else
+  showDemandZone := close < open
