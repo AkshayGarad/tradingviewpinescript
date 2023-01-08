@@ -1,0 +1,24 @@
+// This variable will hold the value of the 15 day average volume
+var avgVol = avg(volume, 15);
+
+// This variable will hold the value of the 20 EMA
+var ema20 = ema(close, 20);
+
+// This variable will hold the value of the 50 EMA
+var ema50 = ema(close, 50);
+
+// Check if the 15 day average volume has broken out
+if (volume > avgVol)
+{
+    // If the 20 EMA is above the 50 EMA, show a buy signal
+    if (ema20 > ema50)
+    {
+        plot(50, "Buy", color.green);
+    }
+}
+
+// If the 20 EMA is below the 50 EMA, show a sell signal
+if (ema20 < ema50)
+{
+    plot(50, "Sell", color.red);
+}
