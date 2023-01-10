@@ -1,0 +1,17 @@
+// Define the strategy
+strategy("Volume Breakout", overlay=true)
+
+// Get the volume of the current candle
+volCurrent = volume
+
+// Get the volume of the previous candle
+volPrevious = volume[1]
+
+// Check if the current candle is red and has higher volume than the previous candle
+if (close < open and volCurrent > volPrevious)
+    // Generate a buy signal
+    strategy.entry("Buy", strategy.long)
+    // Show the volumes on the chart
+    plot(volCurrent, color=green, linewidth=2)
+    plot(volPrevious, color=red, linewidth=2)
+
