@@ -1,0 +1,15 @@
+// Define the triangle pattern
+triangle = (trend_a, trend_b) => {
+    // Get the trendlines
+    a = trendline.new(trend_a, "triangle_a")
+    b = trendline.new(trend_b, "triangle_b")
+
+    // Check if the trendlines intersect
+    if (a.intersects(b)) {
+        // Draw the triangle
+        plotshape(shape.triangleup, style=shape.style_starbar, location=location.belowbar, color=color.lime, size=size.tiny)
+    }
+}
+
+// Call the triangle function
+triangle(trendline.angle(70), trendline.angle(110))
