@@ -1,0 +1,33 @@
+// Merger of MACD and Stochastic RSI
+study("MACD & Stochastic RSI", overlay=true)
+
+// Define the parameters
+fast_length = 12
+slow_length = 26
+macd_length = 9
+rsi_length = 14
+stoch_length = 14
+
+// Calculate the indicators
+macd = ema(close, fast_length) - ema(close, slow_length)
+signal = ema(macd, macd_length)
+rsi = rsi(close, rsi_length)
+k = sma(stoch(close, high, low, stoch_length), 3)
+d = sma(k, 3)
+
+// Plot the indicators
+plot(macd, color=color.blue, linewidth=2)
+plot(signal, color=color.red, linewidth=2)
+
+// Plot the histogram
+plot(macd - signal, color=color.green, histogram=true, linewidth=2)
+
+// Add a second RSI plot
+plot(rsi, color=color.yellow, secondary=true)
+
+//Add Stochastic RSI Plot
+plot(k, color=color.green)
+plot(d, color=color.red)
+
+// Add a legend
+legend(title="MACD & Stochastic RSI", position=position.top)
