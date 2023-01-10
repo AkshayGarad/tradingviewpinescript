@@ -1,0 +1,15 @@
+// Define the strategy
+strategy("Intraday High/Low", overlay=true)
+
+// Get the intraday high and low
+intradayHigh = highest(high, bar_index, 0)
+intradayLow = lowest(low, bar_index, 0)
+
+// Mark the intraday high and low with horizontal lines
+plot(intradayHigh, "Intraday High", color=green, style=plot.style_horizontal)
+plot(intradayLow, "Intraday Low", color=red, style=plot.style_horizontal)
+
+
+
+label.new(bar_index, intradayHigh, intradayHigh, xloc.bar_index, yloc.price, color = color.green, textcolor = color.white)
+label.new(bar_index, intradayLow, intradayLow, xloc.bar_index, yloc.price, color = color.red, textcolor = color.white)
