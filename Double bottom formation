@@ -1,0 +1,22 @@
+// Define the double bottom pattern
+double_bottom = (length) => {
+    // Get the lowest low within the given length
+    first_bottom = lowest(low, length)
+    second_bottom = lowest(low[length/2], length/2)
+
+    // Draw the bottoms
+    plot(first_bottom, color=color.red, style=plot.style_circles, title="Bottom 1")
+    plot(second_bottom, color=color.red, style=plot.style_circles, title="Bottom 2")
+
+    // Draw the neckline
+    neckline = (highest(high[length/2], length/2) + second_bottom) / 2
+    plot(neckline, color=color.green, style=plot.style_line, linewidth=2, title="Neckline")
+
+    // Check for a breakout above the neckline
+    if (close > neckline) {
+        plotshape(shape.arrowup, location=location.abovebar, color=color.lime, size=size.tiny)
+    }
+}
+
+// Call the double_bottom function
+double_bottom(50)
