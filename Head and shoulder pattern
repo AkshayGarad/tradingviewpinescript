@@ -1,0 +1,26 @@
+// Define the head and shoulders pattern
+head_and_shoulders = (length) => {
+    // Get the highest high within the given length
+    head = highest(high, length)
+
+    // Get the left and right shoulders
+    left_shoulder = (head + lowest(low, length)) / 2
+    right_shoulder = (head + lowest(low[length/2], length/2)) / 2
+
+    // Draw the head and shoulders
+    plot(head, color=color.red, style=plot.style_circles, title="Head")
+    plot(left_shoulder, color=color.red, style=plot.style_circles, title="Left Shoulder")
+    plot(right_shoulder, color=color.red, style=plot.style_circles, title="Right Shoulder")
+
+    // Draw the neckline
+    neckline = (left_shoulder + right_shoulder) / 2
+    plot(neckline, color=color.green, style=plot.style_line, linewidth=2, title="Neckline")
+
+    // Check for a breakout below the neckline
+    if (close < neckline) {
+        plotshape(shape.arrowdown, location=location.belowbar, color=color.lime, size=size.tiny)
+    }
+}
+
+// Call the head_and_shoulders function
+head_and_shoulders(50)

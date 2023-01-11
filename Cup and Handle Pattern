@@ -1,0 +1,29 @@
+// Define the cup and handle pattern
+cup_and_handle = (length) => {
+    // Get the highest high and lowest low within the given length
+    highest_high = highest(high, length)
+    lowest_low = lowest(low, length)
+
+    // Draw the cup
+    plot(highest_high, color=color.red, style=plot.style_circles, title="Cup")
+    plot(lowest_low, color=color.red, style=plot.style_circles, title="Cup")
+
+    // Draw the handle
+    handle_height = (highest_high - lowest_low) * 0.5
+    handle_top = highest_high - handle_height
+    handle_bottom = handle_top - handle_height * 0.618
+    plot(handle_top, color=color.green, style=plot.style_circles, title="Handle Top")
+    plot(handle_bottom, color=color.green, style=plot.style_circles, title="Handle Bottom")
+
+    // Draw the breakout line
+    breakout = highest_high + (handle_height * 0.382)
+    plot(breakout, color=color.blue, style=plot.style_line, linewidth=2, title="Breakout")
+
+    // Check for a breakout above the handle
+    if (close > breakout) {
+        plotshape(shape.arrowup, location=location.abovebar, color=color.lime, size=size.tiny)
+    }
+}
+
+// Call the cup_and_handle function
+cup_and_handle(50)
