@@ -1,0 +1,15 @@
+// Define the input parameters for the script
+study("Symmetrical Triangle Pattern", overlay=true)
+length = input(14, minval=1)
+
+// Define the trendlines and their equations
+upperTrendline = hline(highest(high, length), color=blue)
+lowerTrendline = hline(lowest(low, length), color=blue)
+
+// Plot the trendlines on the chart
+plot(upperTrendline, "Upper Trendline", 2)
+plot(lowerTrendline, "Lower Trendline", 2)
+
+// Identify the pattern
+symmetricalTriangle = crossover(upperTrendline, lowerTrendline)
+alertcondition(symmetricalTriangle, title='Symmetrical Triangle', message='Symmetrical triangle pattern identified')
