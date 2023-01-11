@@ -1,0 +1,15 @@
+//@version=4
+study("Rounding Bottom", overlay=true)
+
+// Define a variable for the lookback period
+lookback = input(title="Lookback Period", type=input.integer, defval=50)
+
+// Calculate the moving average of the closing prices
+ma = sma(close, lookback)
+
+// Define the criteria for a rounding bottom
+isRoundingBottom = ma[1] > ma[2] and ma[1] > ma[3] and ma[1] > ma[4]
+
+// Plot the rounding bottom
+plotshape(isRoundingBottom, style=shape.triangleup, location=location.belowbar, color=green)
+
