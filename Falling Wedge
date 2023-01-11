@@ -1,0 +1,13 @@
+//@version=4
+study("Falling Wedge", overlay=true)
+
+// Define trendlines
+trendline1 = trendline(high, angle = -45, color = color.red)
+trendline2 = trendline(low, angle = 45, color = color.red)
+
+// Create the wedge shape
+fill(trendline1, trendline2, color = color.red, transp = 75)
+
+// Check if current bar is within the wedge
+if (cross(trendline1, trendline2))
+    alert("Falling Wedge detected!", message="A falling wedge formation has been detected on the chart.")
