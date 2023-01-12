@@ -1,15 +1,31 @@
-// Define the triangle pattern
-triangle = (trend_a, trend_b) => {
-    // Get the trendlines
-    a = trendline.new(trend_a, "triangle_a")
-    b = trendline.new(trend_b, "triangle_b")
+// Define variables for the triangle pattern
+var triangle = false;
+var bearishTriangle = false;
+var bullishTriangle = false;
 
-    // Check if the trendlines intersect
-    if (a.intersects(b)) {
-        // Draw the triangle
-        plotshape(shape.triangleup, style=shape.style_starbar, location=location.belowbar, color=color.lime, size=size.tiny)
-    }
+// Check for triangle pattern
+if (high[0] == high[1] && low[0] < low[1] && low[1] < low[2]) {
+   triangle = true;
+   bearishTriangle = true;
+} else if (low[0] == low[1] && high[0] > high[1] && high[1] > high[2]) {
+   triangle = true;
+   bullishTriangle = true;
 }
 
-// Call the triangle function
-triangle(trendline.angle(70), trendline.angle(110))
+// Plot the triangle pattern
+if (triangle) {
+   if (bearishTriangle) {
+      plot(low, "Bearish Triangle", color=red, linewidth=2);
+   } else if (bullishTriangle) {
+      plot(high, "Bullish Triangle", color=green, linewidth=2);
+   }
+}
+
+// Add alert for triangle pattern
+if (triangle) {
+   if (bearishTriangle) {
+      alert("Bearish triangle pattern detected");
+   } else if (bullishTriangle) {
+      alert("Bullish triangle pattern detected");
+   }
+}

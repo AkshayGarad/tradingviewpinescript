@@ -1,0 +1,15 @@
+// Define the input parameters for the script
+study("Descending Triangle Pattern", overlay=true)
+length = input(14, minval=1)
+
+// Define the trendlines and their equations
+support = hline(highest(low, length), color=red)
+resistance = trendline(low,length,0.5,0.5, color=red)
+
+// Plot the trendlines on the chart
+plot(support, "Support", 2)
+plot(resistance, "Resistance", 2)
+
+// Identify the pattern
+descendingTriangle = crossover(resistance, support)
+alertcondition(descendingTriangle, title='Descending Triangle', message='Descending triangle pattern identified')

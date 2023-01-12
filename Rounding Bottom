@@ -1,0 +1,26 @@
+//@version=4
+study("Rounding Bottom", overlay=true)
+
+// Define variables for the rounded bottom pattern
+var roundedBottom = false;
+var bottomFound = false;
+
+// Check for rounding bottom pattern
+for (i = 0; i < bar_index; i++) {
+    if(!bottomFound && close[i] < close[i+1]) {
+        bottomFound = true;
+    } else if (bottomFound && close[i] > close[i+1]) {
+        roundedBottom = true;
+    }
+ }
+
+ // Plot the rounded bottom pattern
+if (roundedBottom) {
+    plot(close, "Rounded Bottom", color=red, linewidth=2);
+ }
+
+ // Add alert for rounded bottom pattern
+if (roundedBottom) {
+    alert("Rounded bottom pattern detected");
+ }
+ 
