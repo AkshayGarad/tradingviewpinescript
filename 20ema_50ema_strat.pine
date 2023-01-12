@@ -1,0 +1,19 @@
+//@version=4
+study("EMA Crossover", overlay=true)
+
+// Define the moving averages
+ema20 = ema(close, 20)
+ema50 = ema(close, 50)
+
+// Plot the moving averages
+plot(ema20, color=red)
+plot(ema50, color=blue)
+
+// Generate buy and sell signals
+buy = crossover(ema20, ema50)
+sell = crossunder(ema20, ema50)
+
+// Plot the buy and sell signals
+plotshape(buy, location=location.abovebar, color=green, style=shape.arrowup)
+plotshape(sell, location=location.belowbar, color=red, style=shape.arrowdown)
+plot(close)
