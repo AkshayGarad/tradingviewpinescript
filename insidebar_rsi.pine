@@ -1,19 +1,30 @@
-// Inside Bar + RSI strategy
+// Inside Bar with RSI Strategy
 
-// Parameters
-length = input(14, minval=1)
-rsiThreshold = input(50, minval=1, maxval=99)
+// Inputs
+study(title="Inside Bar with RSI", shorttitle="Inside Bar RSI", overlay=true)
+rsi_period = input(14, minval=1, maxval=100, title="RSI Period")
+rsi_threshold = input(70, minval=1, maxval=100, title="RSI Threshold")
 
-// Define the inside bar function
-insideBar(length) => (high[1] > high[length] and low[1] < low[length])
+// Variables
+rsiVal = rsi(close, rsi_period)
+bar_high = max(high, 2)
+bar_low = min(low, 2)
 
-// Define the RSI function
-rsi = rsi(close, length)
+// Inside Bar
+insideBar = (bar_high < high[1] and bar_low > low[1])
 
-// Buy signal
-if insideBar(length) and rsi < rsiThreshold
-    strategy.entry("Buy", strategy.long)
+// Plotting
+plot(insideBar ? high : na, color=insideBar ? green : na)
+plot(insideBar ? low : na, color=insideBar ? green : na)
 
-// Sell signal
-if insideBar(length) and rsi > rsiThreshold
-    strategy.entry("Sell", strategy.short)
+// RSI
+plot(rsiVal, color=rsiVal > rsi_threshold ? red : green)
+
+// Buy and Sell Signals
+buy = insideBar and rsiVal < rsi_threshold
+sell = insideBar and rsiVal > rsi_threshold
+
+// Plotting Buy and Sell Signals
+plot(buy ? low : na, color=green, linewidth=3)
+plot(sell ? high : na, color=red, linewidth=3)
+
