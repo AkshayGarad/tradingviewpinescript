@@ -1,0 +1,19 @@
+// Inside Bar + RSI strategy
+
+// Parameters
+length = input(14, minval=1)
+rsiThreshold = input(50, minval=1, maxval=99)
+
+// Define the inside bar function
+insideBar(length) => (high[1] > high[length] and low[1] < low[length])
+
+// Define the RSI function
+rsi = rsi(close, length)
+
+// Buy signal
+if insideBar(length) and rsi < rsiThreshold
+    strategy.entry("Buy", strategy.long)
+
+// Sell signal
+if insideBar(length) and rsi > rsiThreshold
+    strategy.entry("Sell", strategy.short)
