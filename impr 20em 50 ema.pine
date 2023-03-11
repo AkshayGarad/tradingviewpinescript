@@ -1,0 +1,15 @@
+//Pine Script code snippet that you can use on TradingView to implement a strategy based on the EMA 20 and EMA 50 crossover:
+//@version=4
+study(title="EMA Crossover Strategy", overlay=true)
+ema20 = ema(close, 20)
+ema50 = ema(close, 50)
+plot(ema20, color=color.red)
+plot(ema50, color=color.blue)
+buySignal = crossover(ema20, ema50)
+sellSignal = crossunder(ema20, ema50)
+strategy.entry("buy", strategy.long, when=buySignal)
+strategy.entry("sell", strategy.short, when=sellSignal)
+
+//This script calculates the 20-period and 50-period exponential moving averages (EMAs) of the closing price, 
+//and generates a buy signal when the EMA 20 crosses above the EMA 50, and a sell signal when the EMA 20 crosses below the EMA 50. 
+//You can add this script to your TradingView chart to see the signals on the chart.
