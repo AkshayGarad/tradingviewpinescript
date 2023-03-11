@@ -1,0 +1,24 @@
+//Pine Script code snippet that you can use on TradingView to implement the strategy
+
+//@version=4
+study(title="Intraday High Low Strategy", overlay=true)
+
+intradayHigh = highest(high, 0)
+intradayLow = lowest(low, 0)
+
+plot(intradayHigh, title="Intraday High", style=plot.style_circles, linewidth=2, color=color.green)
+plot(intradayLow, title="Intraday Low", style=plot.style_circles, linewidth=2, color=color.red)
+
+redCandle = close < open
+increasedVolume = volume > volume[1]
+nextCandleBreaksHigh = high[1] > high[2]
+
+buySignal = redCandle and increasedVolume and nextCandleBreaksHigh
+
+strategy.entry("buy", strategy.long, when=buySignal)
+
+
+//This script calculates the intraday high and low, 
+//and generates a buy signal when the current candle is red, its volume is higher than the previous candles volume, 
+//and the next candle breaks the high of the current red candle. 
+//You can add this script to your TradingView chart to see the signals on the chart. 
