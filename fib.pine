@@ -1,0 +1,21 @@
+//@version=4
+study(title="Fibonacci Retracement", shorttitle="Fib Retracement")
+
+// Define inputs for the Fibonacci retracement levels
+fiboLevels = input(title="Retracement Levels", defval="0.236,0.382,0.5,0.618,0.786,0.886", type=input.string)
+fiboLevelList = str.split(fiboLevels, ",")
+fiboLevel1 = input(title="Level 1", defval=tofloat(fiboLevelList[1]), type=input.float)
+fiboLevel2 = input(title="Level 2", defval=tofloat(fiboLevelList[2]), type=input.float)
+fiboLevel3 = input(title="Level 3", defval=tofloat(fiboLevelList[3]), type=input.float)
+fiboLevel4 = input(title="Level 4", defval=tofloat(fiboLevelList[4]), type=input.float)
+fiboLevel5 = input(title="Level 5", defval=tofloat(fiboLevelList[5]), type=input.float)
+fiboLevel6 = input(title="Level 6", defval=tofloat(fiboLevelList[6]), type=input.float)
+
+// Define inputs for the Fibonacci retracement style
+fiboStyle = input(title="Retracement Style", options=["Simple", "Zigzag", "Swing"], defval="Zigzag")
+fiboColor = input(title="Retracement Color", defval=color.orange, type=input.color)
+
+// Calculate the Fibonacci retracement levels based on the chosen style
+if fiboStyle == "Simple"
+    fiboHigh = highest(high, 100)
+    fiboLow = lowest(low

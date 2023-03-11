@@ -1,0 +1,16 @@
+//@version=4
+study(title="Exponential Moving Averages", shorttitle="EMA")
+
+// EMA periods
+ema9 = ema(close, 9)
+ema20 = ema(close, 20)
+ema50 = ema(close, 50)
+ema100 = ema(close, 100)
+ema200 = ema(close, 200)
+
+// Plot EMAs
+plot(ema9, color=color.orange, linewidth=2, title="EMA9")
+plot(ema20, color=color.blue, linewidth=2, title="EMA20")
+plot(ema50, color=color.purple, linewidth=2, title="EMA50")
+plot(ema100, color=color.green, linewidth=2, title="EMA100")
+plot(ema200, color=color.red, linewidth=2, title="EMA200")
